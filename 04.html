@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="css/04.css"/>
+    <script src='js/zepto.min.js'></script>
+    <title>Document</title>
+</head>
+<body>
+<header id="header">
+    <a href="#" class="logo"><</a>
+    <span><i>肯德基</i>优惠券</span>
+    <a href="#" class="app"><img src="images/header_app.png" alt=""></a>
+</header>
+<section id="tex">
+    <h5>--点餐前出示手机中的优惠卷，即可享受优惠--</h5>
+</section>
+<section id="juan">
+</section>
+<section id="head">
+    <p><a href="mmm.html">首页 ></a><a href="javascript:;">优惠券</a></p>
+</section>
+<section id="xinxi">
+</section>
+<section id="max" style='display: none'>
+    <div class="min">
+        <span><</span>
+        <span></span>
+        <span>></span>
+    </div>
+</section>
+<footer id="footer">
+    <div class="row">
+        <div class="col-xs-4">
+            <a href="#">登录</a>
+        </div>
+        <div class="col-xs-4">
+            <a href="#">注册</a>
+        </div>
+        <div class="col-xs-4">
+            <a href="#"><img src="http://www.zuyushop.com/wap/images/top.jpg" alt="">返回顶部</a>
+        </div>
+    </div>
+    <p> <a href="#">手机APP下载</a> <a href="#">慢慢买手机版</a> -- 掌上比价平台</p>
+    <p>m.manmanbuy.com </p>
+</footer>
+<script>
+    $.get('http://127.0.0.1:3000/api/getcoupon',function(data){
+        var str ='';
+         var bn ='';
+         var att =[];
+         var ste =5;
+         var len =0  ;
+         var r = 0;
+        $.each(data.result,function(i,v){
+            str+=   '<a href="javascript:;" name="'+i+'">'
+                    +'<img src="'+ v.couponImg+'" alt=""/>'
+                    +'<span>'+ v.couponTitle+'</span>'
+                    +'</a>'
+//            console.log(data.result[i].couponId)
+        })
+        $('#juan').append(str);
+        shuju();
+        $('#juan').on('click','a',function(){
+             r=$(this).attr('name');
+             if(r==0){
+               var ste=5;
+            }else{
+              var  ste=1
+            }
+            shuju()
+        })
+      function shuju(){
+          $.get('http://127.0.0.1:3000/api/getcouponproduct?couponid='+r,function(data){
+            var arr = [];
+            att =data.result;
+            for(var j = 0; j<ste;j++){
+                bn +=  '<div class="tiao">'
+                      +'<div class="left">'+ data.result[j].couponProductImg+'</div> '
+                      +'<div class="right">'+data.result[j].couponProductName+'<br>'+data.result[j].couponProductPrice+'</div> '
+                      +'<p>'+ data.result[j].couponProductTime+'</p> '
+                      +'</div> '
+                arr.push(data.result[j].couponProductImg)
+
+             }
+            $('#xinxi').append(bn) ;
+            $(window).scroll(function(){
+                if(Math.ceil($(window).scrollTop())>=$(document).height()-$(window).height()-30){
+                    if(len<att.length){
+                        aa()
+                    }
+                }
+            })
+            var j;
+            $('#xinxi').on('click','.tiao',function(){
+                $('body').css('overflow','hidden') ;
+                $('#max span:nth-of-type(2)').html($('.left', this).html());
+                $('#max').show()  ;
+
+                j=arr.indexOf($('.left', this).html()) ;
+            })
+            $('#max').click(function(){
+                $('body').css('overflow','auto')
+                $(this).hide()
+            })
+            $('#max span:nth-of-type(1)').click(function(e){
+                e.stopPropagation();
+
+                if(j==0){
+                    j=arr.length
+                }
+                j--;
+                $('#max span:nth-of-type(2)').html(arr[j])
+            })
+            $('#max span:nth-of-type(3)').click(function(e){
+                e.stopPropagation();
+                j++;
+                if(j==arr.length) {
+                    j = 0
+                }
+                $('#max span:nth-of-type(2)').html(arr[j])
+            })
+            function  aa(){
+                var dv = '';
+                for(var i = len;i<len+ste;i++){
+                    dv+=  '<div class="tiao">'
+                          +'<div class="left">'+ att[i].couponProductImg+'</div> '
+                          +'<div class="right">'+att[i].couponProductName+'<br>'+att[i].couponProductPrice+'</div> '
+                          +'<p>'+ att[i].couponProductTime+'</p> '
+                          +'</div> '
+                    arr.push(att[i].couponProductImg)
+                }
+                $('#xinxi').append(dv) ;
+                len+=5
+            }
+
+        })
+      }
+    })
+    // $(window).scroll(function(){
+    //     if($(window).scrollTop()<$(document).height()-$(window).height()){
+    //        console.log(d)
+
+    //     }
+    // })
+//    window.onscroll = function(){
+//        window.scrollTo(0,0);
+//    }
+//    window.onscroll=function(){
+//
+//
+//    console.log(document.body.clientHeight);
+//    console.log(document.body.scrollHeight);
+//    console.log(document.body.scrollTop);
+//  }
+</script>
+</body>
+</html>

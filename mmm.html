@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="./css/base.css">
+	<link rel="stylesheet" href="./css/mmm.css">
+	<script src="./js/jquery-3.1.0.js"></script>
+	<title>慢慢买</title>
+</head>
+<body>
+	<div class="mmm">
+		<div class="header">
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+		</div>
+		<div class="search">
+			<input type="text" placeholder="请输入搜索的商品名称">
+			<input type="button" value="搜索">	
+		</div>
+		<div class="app">
+			<ul id="ul"></ul>
+		</div>
+		<div class="navbar">
+			<h4>超值折扣推荐</h4>
+			<a href="#" >></a>
+		</div>
+		<div class="shoop">
+		</div>
+		<button class="mo">
+			点击加载更过>>
+		</button>
+		<div class="navbar">
+			<h4>品牌排行</h4>
+	 		<a href="#" >></a>
+	    </div>
+		<div class="foot">
+			<p><a href="#">登陆</a><a href="#">注册</a><a href="#">返回顶部</a></p>
+			<p><span>手机APP下载</span>慢慢买手机版&nbsp;--&nbsp;掌上比价平台</p>
+			<p>m.manmanbuy.com</p>
+		</div>
+	</div>
+</body>
+<script>
+$.ajax({
+		url:'http://127.0.0.1:3000/api/getindexmenu',
+		data:{data:'result'},
+		dataType:'json',
+		success:function(data){
+			var str='';
+			var b='';
+			var j=1;
+			var a = data.result.slice(8);
+			var result =data.result.slice(0,8);
+			$.each(result,function(i){
+				str += "<li><a href="+result[i].titlehref+">"+result[i].img +"</a><span>"+ result[i].name+"</span></li>"
+			})
+			$('#ul').append(str);
+		    $($('li')[7].children[0]).addClass('more');
+		    // $('.more').click(function(){alert(0)})
+	    	$.each(a,function(i){
+	    		b+="<li><a href="+a[i].titlehref+">"+a[i].img +"</a><span>"+ a[i].name+"</span></li>"
+	    	})
+		    $('#ul').on('click','.more',function(){
+		    	if(j==1){
+		    		 // $('#ul>li:eq(7)').nextAll().remove() ;
+		    		 $('#ul').append(b) ;
+		    		 j = 2
+		    		}else{
+		    			 $('#ul>li:eq(7)').nextAll().remove() ;
+		    			 j=1
+		    		}
+		    })
+		}
+	})
+
+$.ajax({
+	url:'http://127.0.0.1:3000/api/getmoneyctrl',
+	dataType:'json',
+	success:function(data){
+		var str='';
+		var result =data.result;
+		$.each(result,function(i,v){
+			var v = result[i].productComCount;
+			    v = v.replace("有","");
+			    v = v.replace('人评论','');
+			str+='<a href="#" class="l1"><div class="left">'+result[i].productImgSm+'</div><div class="right"><p>'+result[i].productName +'<span>'+result[i].productPinkage +'</span></p><p><a href="#">'+result[i].productFrom+'</a>&nbsp; |<a href="#">'+result[i].productTime+'</a><a href="#"><span>.....</span>'+v+'</a></p></div></a>'
+
+		})
+		$('.shoop').html(str)
+	}
+})
+</script>
+</html>

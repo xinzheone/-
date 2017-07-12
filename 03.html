@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="css/03.css"/>
+    <script src='js/zepto.min.js'></script>
+    <title></title>
+    <style></style>
+</head>
+<body>
+<header id="header">
+    <a href="#" class="logo"><</a>
+    <span>省钱控 - 最新优惠</span>
+    <a href="#" class="app"><img src="images/header_app.png" alt=""></a>
+</header>
+<div class="shoop">
+</div>
+<div class="but">
+    <div class="btn ll">上一页</div>
+    <div class="con" ><span style="padding-left:20px;">1</span>/<span>14</span><b>▲</b></div>
+    <div class="btn rr">下一页</div>
+</div>
+<footer id="footer">
+    <div class="row">
+        <div class="col-xs-4">
+            <a href="#">登录</a>
+        </div>
+        <div class="col-xs-4">
+            <a href="#">注册</a>
+        </div>
+        <div class="col-xs-4">
+            <a href="#"><img src="http://www.zuyushop.com/wap/images/top.jpg" alt="">返回顶部</a>
+        </div>
+    </div>
+    <p> <a href="#">手机APP下载</a> <a href="#">慢慢买手机版</a> -- 掌上比价平台</p>
+    <p>m.manmanbuy.com </p>
+</footer>
+<script>
+
+    var len;
+    var j=0;
+    aa();
+    $('.rr').click(function(){ 
+            j++;
+            if(j>len){
+              j=0;
+            }
+            aa();
+    })
+    $('.ll').click(function(){
+            j--;
+            if(j<0){
+               j=len;
+            }
+            aa();
+    }) 
+   
+    $('.con').on('click','li',function(){
+        j = $(this).find('span:first-of-type').html()-1;
+        aa();
+   })
+       
+    var flag = 1;
+    $('.con').click(function(){
+       if(flag==1){
+           $(this).find('b').style = '';
+           $(this).find('b').css('transform','rotate(0deg)');
+           $('.con').find('li').show();
+           flag = 2;
+       }else{
+           $(this).find('b').style = '';
+           $(this).find('b').css('transform','rotate(180deg)');
+           $('.con').find('li').hide();
+           flag = 1
+       }
+    })
+     function aa(){
+        $.get('http://127.0.0.1:3000/api/getmoneyctrl?pageid='+j,function(data){
+
+//            console.log(typeof j);
+             len = Math.floor(data.totalCount / data.pagesize);
+
+
+            $('.con').html('<span style="padding-left:20px;">'+(j+1)+'</span>/<span>'+(len+1)+'</span><b>▲</b>');
+
+
+            for(var k =0;k<len+1;k++){
+            var vv ='<li style="position:absolute;top:'+(-35*(k+1))+'px;display:none;"><span>'+(k+1)+'</span>/<span>'+(len+1)+'</span></li>';
+            $('.con').append( vv )
+          }  
+          
+            var str='';
+            var result =data.result;
+            $.each(result,function(index,v){
+                var h = v.productComCount;
+                h= h.replace("有","");
+                h= h.replace('人评论','');
+//                console.log(v)
+                str+='<a href="#" class="l1"><div class="left">'+v.productImgSm+'</div><div class="right"><p>'+v.productName +'<span>'+v.productPinkage +'</span></p><p><a href="#">'+v.productFrom+'</a>&nbsp; |<a href="#">'+v.productTime+'</a><a href="#"><span>.....</span>'+h+'</a></p></div></a>'
+
+            })
+            $('.shoop').html(str)   
+        })
+    }
+    
+</script>
+</body>
+</html>

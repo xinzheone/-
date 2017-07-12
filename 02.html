@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="css/02.css"/>
+    <script src='js/zepto.min.js'></script>
+    <title></title>
+</head>
+<body>
+    <header id="header">
+        <a href="#" class="logo"><img src="images/header_logo.png" alt=""></a>
+        <a href="#" class="app"><img src="images/header_app.png" alt=""></a>
+    </header>
+    <!-- 搜索区域 -->
+    <section id="search">
+        <form action="#">
+            <input type="search" name="" id="" placeholder="请输入要比价的商品">
+            <input type="submit" value="搜索">
+        </form>
+    </section>
+    <section id="content">
+       <div class="nav">
+
+       </div>
+    </section>
+    <!-- 底部区域 -->
+    <footer id="footer">
+        <div class="row">
+            <div class="col-xs-4">
+                <a href="#">登录</a>
+            </div>
+            <div class="col-xs-4">
+                <a href="#">注册</a>
+            </div>
+            <div class="col-xs-4">
+                <a href="#"><img src="http://www.zuyushop.com/wap/images/top.jpg" alt="">返回顶部</a>
+            </div>
+        </div>
+        <p> <a href="#">手机APP下载</a> <a href="#">慢慢买手机版</a> -- 掌上比价平台</p>
+        <p>m.manmanbuy.com </p>
+    </footer>
+</body>
+<script>
+    console.log(location.search);
+    $.get('http://127.0.0.1:3000/api/getproductlist?categoryid='+GetQueryString('categoryid'),function(data){
+//        console.log(data)
+
+        var str = '';
+        $.each(data.result,function(i,v){
+            str +=
+               '<div class="right">'
+                +'<a href="03.html" id="cc">'
+                +'<div class="img">'
+                + v.productImg
+                +'</div>'
+                +'<div class="img_right">'
+                +'<p>'+ v.productName+'</p>'
+                +'<p>'+ v.productPrice+'</p>'
+                +'<p>'+ v.productQuote+'&nbsp;&nbsp;&nbsp;&nbsp;'+ v.productCom+'</p>'
+                +'</div>'
+                +'</a>'
+                +'</div>'
+        })
+         var ccc =  '<div class="nav">'
+                    +'<div class="left">'
+                    +'<a href="mmm.html">首页 ></a>'
+                    +'<a href="01.html">全部分类 ></a>'
+                    +'<a href="02.html"> '+decodeURI(GetQueryString('category'))+' ></a>'
+                    +'<button>筛选</button>'
+                    +'</div>'
+                    +str
+                    +'</div>'
+         $('#content').append(ccc) ;
+//        console.log(GetQueryString('category'))
+
+    })
+
+
+
+
+
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+        var context = "";
+        if (r != null)
+            context = r[2];
+        reg = null;
+        r = null;
+        return context == null || context == "" || context == "undefined" ? "" : context;
+    }
+</script>
+</html>

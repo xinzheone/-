@@ -1,0 +1,173 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Microsoft YaHei";
+}
+html,
+body {
+  height: 100%;
+}
+ol,
+ul {
+  list-style: none;
+}
+input,
+select,
+form images,
+button {
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  zoom: 1;
+}
+textarea {
+  width: 95%;
+}
+a {
+  color: #000;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+em,
+i {
+  font-style: normal;
+}
+img {
+  border: none;
+}
+input,
+img {
+  vertical-align: middle;
+}
+body {
+  color: #000;
+  font-family: "Microsoft YaHei";
+  background: #FFF;
+  overflow-x: hidden;
+}
+#header {
+  height: 50px;
+  background-color: #ff841d;
+  padding: 10px;
+}
+#header > .logo {
+  margin-left: 5px;
+}
+#header > .logo > img {
+  height: 25px;
+}
+#header > .app {
+  float: right;
+  margin-top: -2px;
+}
+#header > .app > img {
+  height: 34px;
+}
+#search {
+  background-color: #fff;
+  padding: 10px;
+}
+#search > form {
+  padding-right: 70px;
+  position: relative;
+}
+#search > form > input[type="search"] {
+  width: 100%;
+  height: 30px;
+  border-radius: 15px;
+  border: 0;
+  background-color: #f5f5f5;
+  padding-left: 15px;
+}
+#search > form > input[type="submit"] {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 63px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #ff841d;
+  color: #fff;
+  border: 0;
+}
+#footer > .row > div {
+  text-align: center;
+  border: 1px solid #ccc;
+  height: 30px;
+  width: 33.33%;
+  float: left;
+  line-height: 30px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+#footer > .row > div + div {
+  border-left: 0;
+}
+#footer > p {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 12px;
+}
+#footer > p > a:first-child {
+  color: red;
+}
+#content  {
+  width: 100%;
+  /*height: 100%;*/
+}
+.L_box{
+  width: 100%;
+}
+.L_box p:first-of-type{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: rgb(237, 237, 237);
+  border-bottom: 1px solid #ccc;
+  font-size: 20px;
+  padding-left: 10px;
+  font-weight: 600;
+}
+.L_boxs{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow: hidden;
+}
+.L_boxs a{
+  display: inline-block;
+  width: 33.3333333%;
+  height: 40px;
+  float: left;
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+}

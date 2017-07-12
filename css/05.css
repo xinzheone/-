@@ -1,0 +1,311 @@
+@charset "utf-8";
+/* CSS Document */
+@media only screen and (max-width: 1080px), only screen and (max-device-width: 1080px) {
+  html,
+  body {
+    font-size: 168.75px;
+  }
+}
+@media only screen and (max-width: 960px), only screen and (max-device-width: 960px) {
+  html,
+  body {
+    font-size: 150px;
+  }
+}
+@media only screen and (max-width: 800px), only screen and (max-device-width: 800px) {
+  html,
+  body {
+    font-size: 125px;
+  }
+}
+@media only screen and (max-width: 720px), only screen and (max-device-width: 720px) {
+  html,
+  body {
+    font-size: 112.5px;
+  }
+}
+@media only screen and (max-width: 640px), only screen and (max-device-width: 640px) {
+  html,
+  body {
+    font-size: 100px;
+  }
+}
+@media only screen and (max-width: 600px), only screen and (max-device-width: 600px) {
+  html,
+  body {
+    font-size: 93.75px;
+  }
+}
+@media only screen and (max-width: 540px), only screen and (max-device-width: 540px) {
+  html,
+  body {
+    font-size: 84.375px;
+  }
+}
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  html,
+  body {
+    font-size: 75px;
+  }
+}
+@media only screen and (max-width: 414px), only screen and (max-device-width: 414px) {
+  html,
+  body {
+    font-size: 64.6875px;
+  }
+}
+@media only screen and (max-width: 400px), only screen and (max-device-width: 400px) {
+  html,
+  body {
+    font-size: 62.5px;
+  }
+}
+@media only screen and (max-width: 375px), only screen and (max-device-width: 375px) {
+  html,
+  body {
+    font-size: 58.59375px;
+  }
+}
+@media only screen and (max-width: 360px), only screen and (max-device-width: 360px) {
+  html,
+  body {
+    font-size: 56.25px;
+  }
+}
+@media only screen and (max-width: 320px), only screen and (max-device-width: 320px) {
+  html,
+  body {
+    font-size: 50px;
+  }
+}
+@media only screen and (max-width: 240px), only screen and (max-device-width: 240px) {
+  html,
+  body {
+    font-size: 37.5px;
+  }
+}
+body {
+  background-color: #f5f5f5;
+  font-size: 16px;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Microsoft YaHei";
+}
+html,
+body {
+  height: 100%;
+}
+ol,
+ul {
+  list-style: none;
+}
+input,
+select,
+form,
+image,
+button {
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  zoom: 1;
+}
+textarea {
+  width: 95%;
+}
+a {
+  color: #000;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+em,
+i {
+  font-style: normal;
+}
+img {
+  border: none;
+}
+input,
+img {
+  vertical-align: middle;
+}
+body {
+  color: #000;
+  font-family: "Microsoft YaHei";
+  background: #FFF;
+  overflow-x: hidden;
+}
+#header {
+  position: relative;
+  height: 60px;
+  background-color: orange;
+  padding: 10px;
+}
+#header > .logo {
+  margin-left: 5px;
+  font-size: 2.5em;
+  font-weight: 800;
+  color: #f1f1f1;
+  font-family: cursive;
+  margin-top: -5px;
+}
+#header span {
+  font-size: 1.2em;
+  color: #f1f1f1;
+  font-weight: 600;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#header > .app {
+  float: right;
+  margin-top: 6px;
+}
+#header > .app > img {
+  height: 34px;
+}
+#footer > .row > div {
+  text-align: center;
+  border: 1px solid #ccc;
+  height: 30px;
+  width: 33.33%;
+  float: left;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+#footer > .row > div + div {
+  border-left: 0;
+}
+#footer > .row > div + div img {
+  width: 15px;
+  vertical-align: inherit;
+}
+#footer > p {
+  margin: 5px 0;
+  text-align: center;
+  font-size: 12px;
+}
+#footer > p > a:first-child {
+  color: red;
+}
+#nav {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #cccccc;
+  position: relative;
+}
+#nav div {
+  float: left;
+  text-align: center;
+}
+#nav div i {
+  display: inline-block;
+}
+#nav .jd,
+#nav .dq,
+#nav .jg {
+  width: 28%;
+  font-size: large;
+}
+#nav .ss {
+  width: 15%;
+  height: 50px;
+  border-left: 2px solid #cccccc;
+  background: url("../images/icon_bar.png") no-repeat -20px;
+}
+#jduu,
+#dquu {
+  position: absolute;
+  top: 110px;
+  width: 100%;
+}
+#jduu p,
+#dquu p {
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  line-height: 50px;
+  border-bottom: 1px solid #cccccc;
+  padding-left: 5px;
+}
+#contant {
+  width: 100%;
+  overflow: hidden;
+  background-color: #cccccc;
+}
+#contant #ul {
+  width: 100%;
+}
+#contant #ul li {
+  margin-top: 5px;
+  width: 48%;
+  height: 250px;
+  margin-left: 5px;
+  float: left;
+}
+#contant #ul li a:first-of-type {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+  background-color: #fff;
+}
+#contant #ul li a:first-of-type img {
+  width: 100%;
+  height: 70%;
+  display: block;
+}
+#contant #ul li a:first-of-type h3 {
+  width: 100%;
+  height: 16%;
+  padding-left: 4px;
+  font-size: 11px;
+}
+#contant #ul li a:first-of-type p {
+  width: 100%;
+  height: 13%;
+}
+#contant #ul li a:first-of-type p span {
+  padding-left: 4px;
+  color: red;
+}
+#contant #ul li a:first-of-type p .a {
+  display: inline-block;
+  float: right;
+  width: 60px;
+  background-color: orange;
+  border: 1px solid;
+  border-radius: 7px;
+  text-align: center;
+  margin-right: 4px;
+  color: #fff;
+}

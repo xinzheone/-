@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="css/05.css"/>
+    <script src='js/zepto.min.js'></script>
+    <title></title>
+</head>
+<body>
+<header id="header">
+    <a href="#" class="logo"><</a>
+    <span>凑品单</span>
+    <a href="#" class="app"><img src="images/header_app.png" alt=""></a>
+</header>
+<section id="nav">
+  <div class="jd"><span>京东</span>  <i>▲</i>
+
+  </div>
+  <div class="dq"><span>华北</span>   <i>▲</i></div>
+  <div class="jg">价格   <i>▲</i></div>
+  <div class="ss"></div>
+</section>
+<div id="jduu" ></div>
+<div id="dquu" ></div>
+<section id="contant">
+  <ul id="ul">
+  </ul>
+</section>
+<footer id="footer">
+    <div class="row">
+        <div class="col-xs-4">
+            <a href="#">登录</a>
+        </div>
+        <div class="col-xs-4">
+            <a href="#">注册</a>
+        </div>
+        <div class="col-xs-4">
+            <a href="#"><img src="http://www.zuyushop.com/wap/images/top.jpg" alt="">返回顶部</a>
+        </div>
+    </div>
+    <p> <a href="#">手机APP下载</a> <a href="#">慢慢买手机版</a> -- 掌上比价平台</p>
+    <p>m.manmanbuy.com </p>
+</footer>
+<script>
+    var shopid= 0;
+    var areaid=0;
+    var i;
+    mmm();
+    var f = 1;
+    var ff=1;
+    //注释
+    $.get('http://127.0.0.1:3000/api/getgsshop',function(data){
+        var str = '';
+        for( i =0;i<data.result.length;i++){
+            str += '<p shopid="'+data.result[i].shopId+'"><i>'+data.result[i].shopName+'</i><span style="color: red;float:right;display: none">√</span></p>'
+        }
+
+
+        $('.jd').click(function(){
+            $('#dquu p').hide();
+            $('.dq  i').css('transform','rotate(360deg)');
+            ff=1;
+            if(f==1){
+//                $('#jduu p').show();
+                $('#jduu').html(str);
+               $('i',this).css('transform','rotate(180deg)');
+               f=2
+            }else{
+                $('#jduu p').hide();
+                $('i',this).css('transform','rotate(360deg)');
+                f=1
+            }
+        })
+    })
+
+    //注释
+    $.get('http://127.0.0.1:3000/api/getgsshoparea',function(data){
+        var str = '';
+        for(var i =0;i<data.result.length;i++){
+            str += '<p areaid="'+data.result[i].areaId+'"><i>'+data.result[i].areaName+'</i><span style="color: red;float:right;display: none">√</span></p>'
+        }
+        $('.dq').click(function(){
+            $('#jduu p').hide();
+            $('.jd  i').css('transform','rotate(360deg)');
+            f=1;
+            if(ff==1){
+                $('#dquu').html(str);
+                $('i',this).css('transform','rotate(180deg)');
+                ff=2
+            }else{
+                $('#dquu p').hide();
+                $('i',this).css('transform','rotate(360deg)');
+                ff=1
+            }
+        })
+    })
+    //注释
+    $('#jduu').on('click','p',function(){
+//        console.log($(this).attr('shopid')||$(this).attr('areaid'));
+        shopid = $(this).attr('shopid')-0;
+        $('#jduu').find('p').hide();
+        $('.jd  i').css('transform','rotate(360deg)');
+        $('.jd').find('span').html($('i',this).html())
+        f=1;
+//        console.log( shopid+'===='+areaid);
+        mmm();
+    })
+    $('#dquu').on('click','p',function(){
+//        console.log($(this).attr('shopid')||$(this).attr('areaid'));
+        areaid = $(this).attr('areaid')-0;
+        $('#dquu').find('p').hide();
+        $('.dq  i').css('transform','rotate(360deg)');
+        $('.dq').find('span').html($('i',this).html().slice(0,2))
+        ff=1;
+        console.log( shopid+'===='+areaid);
+        mmm();
+    })
+//   console.log( shopid+'===='+areaid);
+   function mmm(){
+       $.get('http://127.0.0.1:3000/api/getgsproduct?shopid='+shopid+'&areaid='+areaid,function(data){
+           var bn ='';
+           for(var i =0;i<data.result.length;i++){
+               bn += '<li>'
+                       +'<a href="javascript:;">'
+                       +   '<img src="'+data.result[i].productImg+'" alt=""/>'
+                       +   '<h3>'+data.result[i].productName+' </h3>'
+                       +   '<p><span>'+data.result[i].productPrice+'</span> <object><a href="javascript:;"class="a">去凑单</a></object></p>'
+                       +'</a>'
+                       +'</li>'
+           }
+           $('#ul').html(bn)
+       })
+   }
+</script>
+</body>
+</html>
